@@ -1,17 +1,20 @@
 name: 测试 Manage Tag
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      commit-sha:
+        description: '指定要打标签的 commit SHA（留空则使用最新提交）'
+        required: false
+        type: string
 
 jobs:
   ManageTag:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 5
 
     permissions:
       contents: write
@@ -23,6 +26,6 @@ jobs:
       - name: Manage Tag
         uses: infinity-public/action-manage-tag@v1
         with:
-          tag-commit: ${{ github.event.pull_request.merge_commit_sha }}
+          tag-commit: ${{ inputs.commit-sha || github.sha }}
           tag-min-count: 10
           tag-min-days: 30
