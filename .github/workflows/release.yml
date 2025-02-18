@@ -25,6 +25,8 @@ jobs:
 
       - name: Manage Tag
         uses: infinity-public/action-manage-tag@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag-commit: ${{ inputs.commit-sha || github.sha }}
           tag-min-count: 10
