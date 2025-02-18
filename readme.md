@@ -37,7 +37,7 @@ jobs:
           tag-min-days: 30
 ```
 
-## 输入参数
+## 输入参数 
 
 - `tag-commit`: **必需** 表示tag的来源commit
 
