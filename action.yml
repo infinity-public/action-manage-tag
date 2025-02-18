@@ -1,0 +1,22 @@
+name: Manage Tag
+
+description: A GitHub Action that automatically creates and cleans up tags, typically used for creating backup tags after code merges to main branch.
+
+inputs:
+  tag-commit:
+    description: 'The source commit for creating tags'
+    required: true
+
+  tag-min-count:
+    description: 'Minimum number of tags to retain (default: 10)'
+    required: false
+    default: '10'
+
+  tag-min-days:
+    description: 'Minimum number of days to retain tags (default: 30)'
+    required: false
+    default: '30'
+
+runs:
+  using: 'node20'
+  main: 'lib/index.js'

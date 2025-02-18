@@ -1,0 +1,28 @@
+name: 测试 Manage Tag
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  ManageTag:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Manage Tag
+        uses: infinity-public/action-manage-tag@v1
+        with:
+          tag-commit: ${{ github.event.pull_request.merge_commit_sha }}
+          tag-min-count: 10
+          tag-min-days: 30
