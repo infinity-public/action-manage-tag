@@ -1,6 +1,6 @@
 name: Manage Tag
 
-description: A GitHub Action that automatically creates and cleans up tags, typically used for creating backup tags after code merges to main branch.
+description: A GitHub Action that automatically creates and cleans up tags.
 
 inputs:
   tag-commit:
