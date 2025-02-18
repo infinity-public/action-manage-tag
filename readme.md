@@ -10,17 +10,15 @@
 name: Manage Tag
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   ManageTag:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 5
 
     permissions:
       contents: write
@@ -31,13 +29,15 @@ jobs:
 
       - name: Manage Tag
         uses: infinity-public/action-manage-tag@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag-commit: ${{ github.event.pull_request.merge_commit_sha }}
+          tag-commit: ${{ github.sha }}
           tag-min-count: 10
           tag-min-days: 30
 ```
 
-## 输入参数 
+## 输入参数
 
 - `tag-commit`: **必需** 表示tag的来源commit
 
